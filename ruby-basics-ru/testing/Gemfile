@@ -3,5 +3,5 @@
 source 'https://rubygems.org'
 
 # BEGIN
-
+require 'minitest-power_assert'
 # END
