@@ -2,31 +2,39 @@
 
 # BEGIN
 require 'uri'
+require 'forwardable'
 
 class Url
-  def initialize(url)
-    @uri = URI(url)
-    query_string = @uri.query || ''
-    @query_params =
-      query_string
-      .split('&')
-      .to_h do |pair|
-        k, v = pair.split('=')
-        [k.to_sym, v]
-      end
-  end
-  attr_reader :uri, :query_params
-
   extend Forwardable
-  def_delegators :uri, :scheme, :host
 
-  include Comparable
-  def <=>(other)
-    uri <=> other.uri
+  def initialize(url)
+    @url = URI(url)
+  end
+
+  def query_params
+    return {} unless @url.query
+
+    @url.query.split('&').map do |param|
+      key, value = param.split('=')
+      [key, value]
+    end.to_h.transform_keys(&:to_sym)
   end
 
   def query_param(key, default = nil)
-    query_params.fetch(key, default)
+    query_params[key] || default
   end
+
+  def ==(other_url)
+    if @url.scheme == other_url.scheme &&
+       @url.host == other_url.host &&
+       @url.port == other_url.port &&
+       query_params == other_url.query_params
+      true
+    else
+      false
+    end
+  end
+
+  def_delegators :@url, :scheme, :host, :port
 end
 # END
