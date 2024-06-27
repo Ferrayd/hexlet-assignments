@@ -1,0 +1,10 @@
+one:
+  title: MyString1
+  body: MyText1
+  published: false
+
+two:
+  title: MyString2
+  body: MyText2
+  published: false
+  
