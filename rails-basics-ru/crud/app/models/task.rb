@@ -4,5 +4,5 @@ class Task < ApplicationRecord
   validates :creator, presence: true
   validates :completed, inclusion: { in: [true, false] }
 
-  enum status: { new: 'new', in_progress: 'in_progress', completed: 'completed' }
+  enum :status, { task_new: 'new', in_progress: 'in_progress', completed: 'completed' }
 end

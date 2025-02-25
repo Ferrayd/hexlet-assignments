@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -12,35 +12,34 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     )
   end
 
-  test "должен получить index" do
+  test 'должен получить index' do
     get tasks_url
     assert_response :success
   end
 
-  test "должен создать задачу" do
+  test 'должен создать задачу' do
     assert_difference('Task.count') do
-      post tasks_url, params: { task: { name: "Новая задача", status: 'new', creator: "Автор", completed: false } }
+      post tasks_url, params: { task: { name: 'Новая задача', status: 'new', creator: 'Автор', completed: false } }
     end
     assert_redirected_to task_url(Task.last)
   end
 
-  test "должен показать задачу" do
+  test 'должен показать задачу' do
     get task_url(@task)
     assert_response :success
   end
 
-  test "должен обновить задачу" do
-    patch task_url(@task), params: { task: { name: "Обновленное название" } }
+  test 'должен обновить задачу' do
+    patch task_url(@task), params: { task: { name: 'Обновленное название' } }
     assert_redirected_to task_url(@task)
     @task.reload
-    assert_equal "Обновленное название", @task.name
+    assert_equal 'Обновленное название', @task.name
   end
 
-  test "должен удалить задачу" do
+  test 'должен удалить задачу' do
     assert_difference('Task.count', -1) do
       delete task_url(@task)
     end
     assert_redirected_to tasks_url
   end
 end
-
