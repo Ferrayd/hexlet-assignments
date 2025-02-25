@@ -11,8 +11,9 @@
 
   <p>
     <%= form.label :status %><br>
-    <%= form.select :status, Task.statuses.keys.map { |s| [s.humanize, s] } %>
+    <%= form.text_field :status %>
   </p>
+
 
   <p>
     <%= form.label :creator %><br>

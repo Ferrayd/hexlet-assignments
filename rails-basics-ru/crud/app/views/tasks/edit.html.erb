@@ -9,10 +9,11 @@
     <%= form.text_area :description %>
   </p>
 
-  <p>
-    <%= form.label :status %><br>
-    <%= form.select :status, Task.statuses.keys.map { |s| [s.humanize, s] } %>
-  </p>
+<p>
+  <%= form.label :status %><br>
+  <%= form.text_field :status %>
+</p>
+
 
   <p>
     <%= form.label :creator %><br>

@@ -13,19 +13,27 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    puts "Создаваемая задача: #{@task.inspect}"
+  
     if @task.save
       redirect_to @task, notice: 'Задача успешно создана.'
     else
+      puts "Ошибка создания: #{@task.errors.full_messages}"
       render :new, status: :unprocessable_entity
     end
   end
+  
 
   def edit; end
 
   def update
+    puts "Обновляем задачу: #{@task.inspect}"
+    puts "Переданные параметры: #{task_params.inspect}"
+
     if @task.update(task_params)
-      redirect_to @task, notice: 'Задача успешно обновлена.'
+      redirect_to @task, notice: 'Задача обновлена'
     else
+      puts "Ошибка обновления: #{@task.errors.full_messages}"
       render :edit, status: :unprocessable_entity
     end
   end

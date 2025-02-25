@@ -5,7 +5,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task = Task.create!(
       name: Faker::Lorem.sentence,
       description: Faker::Lorem.paragraph,
-      status: 'new',
+      status: 'task_new',
       creator: Faker::Name.name,
       performer: Faker::Name.name,
       completed: false
@@ -19,7 +19,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test 'должен создать задачу' do
     assert_difference('Task.count') do
-      post tasks_url, params: { task: { name: 'Новая задача', status: 'new', creator: 'Автор', completed: false } }
+      post tasks_url, params: { task: { name: 'Новая задача', status: 'task_new', creator: 'Автор', completed: false } }
     end
     assert_redirected_to task_url(Task.last)
   end
