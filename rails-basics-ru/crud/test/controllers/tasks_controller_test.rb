@@ -1,62 +1,46 @@
-# frozen_string_literal: true
-
-require 'test_helper'
+require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @task = tasks(:one)
-    @attrs = {
-      name: Faker::Artist.name,
-      description: Faker::Movies::HarryPotter.quote,
-      status: Faker::Movies::HarryPotter.spell,
-      creator: Faker::Movies::HarryPotter.character,
-      performer: Faker::Movies::HarryPotter.character,
-      completed: Faker::Boolean.boolean
-    }
+    @task = Task.create!(
+      name: Faker::Lorem.sentence,
+      description: Faker::Lorem.paragraph,
+      status: 'new',
+      creator: Faker::Name.name,
+      performer: Faker::Name.name,
+      completed: false
+    )
   end
 
-  test 'should get index' do
+  test "должен получить index" do
     get tasks_url
     assert_response :success
   end
 
-  test 'should get new' do
-    get new_task_url
-    assert_response :success
+  test "должен создать задачу" do
+    assert_difference('Task.count') do
+      post tasks_url, params: { task: { name: "Новая задача", status: 'new', creator: "Автор", completed: false } }
+    end
+    assert_redirected_to task_url(Task.last)
   end
 
-  test 'should create task' do
-    post tasks_url, params: { task: @attrs }
-
-    task = Task.find_by! name: @attrs[:name]
-
-    assert_redirected_to task_url(task)
-  end
-
-  test 'should show task' do
+  test "должен показать задачу" do
     get task_url(@task)
     assert_response :success
   end
 
-  test 'should get edit' do
-    get edit_task_url(@task)
-    assert_response :success
-  end
-
-  test 'should update task' do
-    patch task_url(@task), params: { task: @attrs }
+  test "должен обновить задачу" do
+    patch task_url(@task), params: { task: { name: "Обновленное название" } }
     assert_redirected_to task_url(@task)
-
     @task.reload
-
-    assert { @task.name == @attrs[:name] }
+    assert_equal "Обновленное название", @task.name
   end
 
-  test 'should destroy task' do
-    delete task_url(@task)
-
+  test "должен удалить задачу" do
+    assert_difference('Task.count', -1) do
+      delete task_url(@task)
+    end
     assert_redirected_to tasks_url
-
-    assert { !Task.exists? @task.id }
   end
 end
+

@@ -1,7 +1,35 @@
-<%# Flash отображаются из app/views/layouts/application.html.erb %>
-<h1>Edit task</h1>
+<%= form_with(model: @task) do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
 
-<%= render 'form', task: @task %>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
 
-<%= link_to 'Back', tasks_path %>
-<%= link_to 'Show', task_path(@task) %>
+  <p>
+    <%= form.label :status %><br>
+    <%= form.select :status, Task.statuses.keys.map { |s| [s.humanize, s] } %>
+  </p>
+
+  <p>
+    <%= form.label :creator %><br>
+    <%= form.text_field :creator %>
+  </p>
+
+  <p>
+    <%= form.label :performer %><br>
+    <%= form.text_field :performer %>
+  </p>
+
+  <p>
+    <%= form.label :completed %>
+    <%= form.check_box :completed %>
+  </p>
+
+  <%= form.submit %>
+<% end %>
+
+<%= link_to 'Назад', tasks_path %>

@@ -1,9 +1,11 @@
-<h2><%= link_to 'Create new task', new_task_path %></h2>
-<h1>Tasks</h1>
-<%# <hr> %>
-
-<% @tasks.each do |task| %>
-  <h3><%= link_to task.name, task_path(task) %></h3>
-  <small><i>Created by: <%= task.creator %>, <%= task.created_at.in_time_zone('Moscow').strftime("%H:%m %d.%m.%y") %></i></small>
-  <%# <hr> %>
-<% end %>
+<h1>Список задач</h1>
+<%= link_to 'Создать задачу', new_task_path %>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= link_to task.name, task_path(task) %> |
+      <%= link_to 'Редактировать', edit_task_path(task) %> |
+      <%= link_to 'Удалить', task_path(task), method: :delete, data: { confirm: 'Вы уверены?' } %>
+    </li>
+  <% end %>
+</ul>
