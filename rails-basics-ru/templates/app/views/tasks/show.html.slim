@@ -1,0 +1,8 @@
+h1 = @task.name
+p = @task.description
+p Статус: = @task.status
+p Создатель: = @task.creator
+p Исполнитель: = @task.performer.presence || 'Не назначен'
+p Завершена: = @task.completed ? 'Да' : 'Нет'
+
+= link_to 'Назад', tasks_path

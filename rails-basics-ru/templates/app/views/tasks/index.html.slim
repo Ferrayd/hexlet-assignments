@@ -1,0 +1,11 @@
+h1 Список задач
+= link_to 'Создать задачу', new_task_path
+
+ul
+  - @tasks.each do |task|
+    li
+      = link_to task.name, task_path(task)
+      |  | 
+      = link_to 'Редактировать', edit_task_path(task)
+      |  | 
+      = link_to 'Удалить', task_path(task), method: :delete, data: { confirm: 'Вы уверены?' }
