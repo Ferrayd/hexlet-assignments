@@ -1,0 +1,6 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.summary %></p>
+<p><%= @post.body %></p>
+<p><strong>Статус:</strong> <%= @post.published ? 'Опубликован' : 'Черновик' %></p>
+<%= link_to 'Редактировать', edit_post_path(@post) %> |
+<%= link_to 'Назад', posts_path %>

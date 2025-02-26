@@ -1,0 +1,12 @@
+<h1>Список постов</h1>
+<%= link_to 'Создать пост', new_post_path %>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post %> 
+      (<%= post.published ? 'Опубликован' : 'Черновик' %>)
+      <%= link_to 'Редактировать', edit_post_path(post) %> |
+      <%= link_to 'Удалить', post, method: :delete, data: { confirm: 'Вы уверены?' } %>
+    </li>
+  <% end %>
+</ul>
