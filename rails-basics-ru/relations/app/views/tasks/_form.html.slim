@@ -1,0 +1,6 @@
+= simple_form_for @task do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :user_id, collection: User.all, label_method: :name, value_method: :id, prompt: "Выберите пользователя"
+  = f.input :status_id, collection: Status.all, label_method: :name, value_method: :id, prompt: "Выберите статус"
+  = f.submit
