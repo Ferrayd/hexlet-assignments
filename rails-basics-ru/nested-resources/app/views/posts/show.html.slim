@@ -1,0 +1,24 @@
+- content_for :title do
+  = @post.title
+p
+  strong.me-2 Body:
+  = @post.body
+
+h2 Добавить комментарий
+= simple_form_for [@post, PostComment.new], url: post_comments_path(@post) do |f|
+  = f.input :content, label: 'Комментарий'
+  = f.submit 'Добавить', class: 'btn btn-primary'
+
+h2 Комментарии
+ul
+  - @post.post_comments.each do |comment|
+    li
+      = comment.content
+      = link_to 'Редактировать', edit_post_comment_path(@post, comment)
+      = link_to 'Удалить', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Вы уверены?' }
+
+hr
+
+.d-flex
+  = link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-primary me-2'
+  = link_to 'Back', :back, class: 'btn btn-outline-primary'
