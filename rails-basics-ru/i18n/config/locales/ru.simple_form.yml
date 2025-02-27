@@ -1,0 +1,16 @@
+ru:
+  simple_form:
+    buttons:
+      create: "Создать Пост"
+    'yes': 'ДА'
+    'no': 'Нет'
+    required:
+      text: 'обязательное'
+      mark: '*'
+    error_notification:
+      default_message: 'Пожалуйста, исправьте ошибки:'
+    placeholders:
+      title: "Название"
+      body: "Введите текст"
+      post_comment:
+        body: Текст

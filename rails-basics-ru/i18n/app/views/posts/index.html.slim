@@ -1,0 +1,52 @@
+- content_for :title do
+  / page title (h1)
+  / BEGIN
+  = t('.all')
+
+- @posts.each do |post|
+  div
+    h2 = post.title
+    p = post.body
+    p = t("posts.index.#{post.comments.count.zero? ? 'no_comments' : (post.comments.count == 1 ? 'one_comment' : 'multiple_comments')}", count: post.comments.count)
+
+    = link_to t("posts.show.body"), post_path(post)
+    = link_to t("posts.edit.title"), edit_post_path(post)
+    = link_to t("posts.delete"), post_path(post), method: :delete, data: { confirm: t("posts.confirm") }
+
+  / END
+
+table.table.table-striped.table-hover.mb-5
+  thead
+    tr
+      th{ scope = 'col' } #
+      th{ scope = 'col' }
+        / table title
+        / BEGIN
+        = t('posts.show.body')
+        / END
+      th
+      th
+
+  tbody
+    - @posts.each_with_index do |post, i|
+      tr
+        th{ scope = 'row' } = i + 1
+        td = post.title
+        td
+          / comments count
+          / BEGIN
+          = t('.comments_count', count: post.comments.count)
+          / END
+        td.d-flex
+          / posts links
+          / BEGIN
+          .me-4 = link_to t('show'), post
+          .me-4 = link_to t('edit'), edit_post_path(post)
+          = link_to t('destroy'), post, data: { confirm: t('destroy_confirmation') }, method: :delete
+          / END
+
+/ new post link
+= link_to new_post_path, id: 'new-post-link', class: 'btn btn-primary' do
+  / BEGIN
+  = t('.new')
+  / END

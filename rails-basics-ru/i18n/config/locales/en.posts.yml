@@ -1,0 +1,35 @@
+en:
+  posts:
+    # BEGIN
+    delete: Delete post
+    confirm: Are you shure?
+    index:
+      all: Posts
+      new: New Post
+      comments_count:
+        zero: No comments
+        one: '%{count} comment'
+        other: '%{count} comments'
+    show:
+      body: Body
+      comments: Comments
+    edit:
+      title: Editing post
+    create:
+      success: Post was created.
+    update:
+      success: Post was updated.
+    destroy:
+      success: Post was destroyed.
+
+    # END
+
+    comments:
+      edit:
+        title: Editing comment
+
+      create:
+        success: Comment was created.
+
+      update:
+        success: Comment was updated.

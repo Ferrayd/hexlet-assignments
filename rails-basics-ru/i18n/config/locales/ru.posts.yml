@@ -1,0 +1,37 @@
+ru:
+  posts:
+    # BEGIN
+    confirm: Вы уверены?
+    delete: Удалить пост.
+    index:
+      all: Посты
+      new: Новый пост
+      comments_count:
+        zero: нет комментариев
+        one: '%{count} комментарий'
+        two: '%{count} комментария'
+        few: '%{count} комментариев'
+        many: '%{count} комментариев'
+        other:
+    show:
+      body: Содержимое
+      comments: Комментарии
+    edit:
+      title: Изменить пост
+    create:
+      success: Пост создан.
+    update:
+      success: Пост обновлен.
+    destroy:
+      success: Пост удален.
+    # END
+
+    comments:
+      edit:
+        title: Изменить комментарий
+
+      create:
+        success: Комментарий создан.
+
+      update:
+        success: Комментарий обновлен.
