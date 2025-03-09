@@ -1,60 +1,59 @@
-# test/system/posts_test.rb
+# frozen_string_literal: true
 
-require "application_system_test_case"
+require 'application_system_test_case'
 
-class PostsControllerTest < ActionDispatch::IntegrationTest
+# BEGIN
+class PostsTest < ApplicationSystemTestCase
   setup do
-    @post = posts(:without_comments)
-
-    @attrs = {
-      title: Faker::Book.title,
-      body: Faker::Books::Dune.quote
-    }
+    @post = posts(:one)
   end
 
-  test 'should get index' do
-    get posts_url
-    assert_response :success
+  test 'visiting the index' do
+    visit posts_url
+    assert_selector 'h1', text: 'Posts'
   end
 
-  test 'should get new' do
-    get new_post_url
-    assert_response :success
+  test 'creating a Post' do
+    visit posts_url
+    click_on 'New Post'
+    fill_in 'Title', with: 'TestTitle'
+    fill_in 'Body', with: 'TestBody'
+    click_on 'Create Post'
+
+    assert_text 'Post was successfully created'
   end
 
-  test 'should create post' do
-    post posts_url, params: { post: @attrs }
+  test 'updating a Post' do
+    visit posts_url
+    click_on 'Edit', match: :first
 
-    post = Post.find_by @attrs
+    click_on 'Update Post'
 
-    assert { post }
-    assert_redirected_to post_url(post)
+    assert_text 'Post was successfully updated'
   end
 
-  test 'should show post' do
-    get post_url(@post)
-    assert_response :success
+  test 'destroying a Post' do
+    visit posts_url
+    # page.accept_confirm do
+    #   click_on 'Destroy', match: :first
+    # end
+    click_on 'Destroy', match: :first
+    assert_text 'Post was successfully destroyed'
   end
 
-  test 'should get edit' do
-    get edit_post_url(@post)
-    assert_response :success
-  end
+  test 'creating an comment' do
+    comment_text = Faker::Movies::StarWars.quote
+    post = posts :without_comments
+    visit post_url(post)
 
-  test 'should update post' do
-    patch post_url(@post), params: { post: @attrs }
+    assert_text post.title
+    assert_text post.body
 
-    @post.reload
+    find('#post_comment_body').set(comment_text)
 
-    assert { @post.title == @attrs[:title] }
-    assert_redirected_to post_url(@post)
-  end
+    click_on 'Create Comment'
 
-  test 'should destroy post' do
-    delete post_url(@post)
-
-    assert { !Post.exists? @post.id }
-
-    assert_redirected_to posts_url
+    assert_text comment_text
   end
 end
+# END
