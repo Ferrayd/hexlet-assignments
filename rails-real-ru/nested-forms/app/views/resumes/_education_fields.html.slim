@@ -1,0 +1,9 @@
+.nested-fields
+  .field
+    = f.input :institution, label: 'Учебное заведение', required: true
+  .field
+    = f.input :faculty, label: 'Факультет', required: true
+  .field
+    = f.input :begin_date, label: 'Дата начала', as: :date, required: true
+
+  = link_to_remove_association 'Удалить', f, class: 'btn btn-danger'
