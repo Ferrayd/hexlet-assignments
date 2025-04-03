@@ -1,0 +1,9 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    title Account Activation
+  body
+    h1 Hello, #{@user.username}!
+    p Welcome to our test site. To complete registration follow the link below:
+    a href="#{account_activation_url(confirmation_token: @user.confirmation_token)}" Complete registration
